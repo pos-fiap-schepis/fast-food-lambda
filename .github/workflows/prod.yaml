@@ -36,4 +36,4 @@ jobs:
 
       - name: Deploy SAM application
         run: |
-          sam deploy
+          sam deploy --no-confirm-changeset
