@@ -20,12 +20,12 @@ Resources:
       Architectures:
         - x86_64
       MemorySize: 512
-      Role: arn:aws:iam::631818169384:role/LabRole  # replace with your AWS account ID
+      Role: arn:aws:iam::566814225519:role/LabRole  # replace with your AWS account ID
       Environment:
         Variables:
-          userPoolId: us-east-1_Swqd4YA5h
-          appClientId: 6dm3je7bc7thsseeh0rc32vohi
-          clientSecret: 1olarkpedcl0u37nt7pklurh5jkjbqvid698q20tluijr7ti77q5
+          userPoolId: us-east-1_VQkQuLCzq
+          appClientId: 7m3o7thnihntm9asogh27edq82
+          clientSecret: clo45u50kt7v75bvkkjuq4utpcq5keuebk2hd35via6v6mjm568
           defaultUser: Admin
           defaultPassword: Admin123
       Events:
