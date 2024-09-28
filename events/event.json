@@ -5,7 +5,7 @@
     "httpMethod": "POST",
     "isBase64Encoded": false,
     "queryStringParameters": {
-      "cpf": ""
+      "cpf": "04803496145"
     },
     "pathParameters": {
       "proxy": "/path/to/resource"

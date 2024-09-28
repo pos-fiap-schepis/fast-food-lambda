@@ -30,13 +30,13 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.UserNotFoun
  */
 public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    String userPoolId = "us-east-1_abXEWQfHI";
-    String appClientId = "4slm9se6k01t808ljhkbtt5cdq";
+    String userPoolId =  System.getenv("userPoolId");
+    String appClientId = System.getenv("appClientId");
 
-    String clientSecret = "1stq4534if6guci111q4mju8oc5ffa8gamfad8canhrag54u2b19";
+    String clientSecret = System.getenv("clientSecret");
 
-    String defaultUser = "Admin";
-    String defaultPassword = "Admin123";
+    String defaultUser = System.getenv("defaultUser");
+    String defaultPassword = System.getenv("defaultPassword");
 
     Logger logger = Logger.getLogger(App.class.getName());
 
@@ -48,14 +48,18 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
                 .withHeaders(headers);
 
         Map<String, String> queryStringParameters = input.getQueryStringParameters();
+
+        if (queryStringParameters == null) {
+            return retornarAccesTokenUserDefault(response);
+        }
+
         String cpf = queryStringParameters.get("cpf");
-        String accessToken;
         if (Objects.isNull(cpf) || cpf.isEmpty()) {
             return retornarAccesTokenUserDefault(response);
         }
 
         AdminGetUserResponse usuario = obterUsuarioCognito(cpf);
-        accessToken = gerarAccesToken(cpf, usuario);
+        String accessToken = gerarAccesToken(cpf, usuario);
 
         try {
             String output = String.format("{ \"access_token\": \"%s\" }", accessToken);

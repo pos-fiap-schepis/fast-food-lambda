@@ -5,7 +5,6 @@ Description: >
 
   Sample SAM Template for fast-food-lambda
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 20
@@ -13,7 +12,7 @@ Globals:
 
 Resources:
   FastFoodLambda:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: FastFoodLambda
       Handler: fastfood.App::handleRequest
@@ -21,26 +20,25 @@ Resources:
       Architectures:
         - x86_64
       MemorySize: 512
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+      Role: arn:aws:iam::631818169384:role/LabRole  # replace with your AWS account ID
+      Environment:
         Variables:
-          PARAM1: VALUE
+          userPoolId: us-east-1_Swqd4YA5h
+          appClientId: 6dm3je7bc7thsseeh0rc32vohi
+          clientSecret: 1olarkpedcl0u37nt7pklurh5jkjbqvid698q20tluijr7ti77q5
+          defaultUser: Admin
+          defaultPassword: Admin123
       Events:
         FastFood:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
-            Path: /hello
+            Path: /identificaliente
             Method: get
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   FastFoodApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   FastFoodLambda:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt FastFoodLambda.Arn
-  FastFoodLambdaIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt FastFoodLambdaRole.Arn
