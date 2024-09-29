@@ -20,10 +20,10 @@ Resources:
       Architectures:
         - x86_64
       MemorySize: 512
-      Role: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/LabRole  # replace with your AWS account ID
+      Role: arn:aws:iam::631818169384:role/LabRole  # replace with your AWS account ID
       Environment:
         Variables:
-          userPoolId: ${{ secrets.COGNITO_USER_POOL_ID }}
+          userPoolId: ${{ secrets.COGNITO_USER_POOL_ID
           appClientId:  ${{ secrets.APP_CLIENT_ID }}
           clientSecret: ${{ secrets.AAP_CLIENT_SECRET }}
           defaultUser: Admin
